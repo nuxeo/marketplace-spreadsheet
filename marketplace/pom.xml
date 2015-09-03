@@ -13,6 +13,13 @@
   <packaging>zip</packaging>
   <name>Nuxeo Spreadsheet Marketplace package</name>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.nuxeo.ecm.platform</groupId>
+      <artifactId>nuxeo-platform-spreadsheet</artifactId>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
       <plugin>
