@@ -122,6 +122,7 @@ public class ITSpreadsheetTest extends AbstractTest {
         ContentViewElement contentView = getWebFragment(By.id("cv_document_content_0_panel"), ContentViewElement.class);
 
         contentView.switchToResultLayout(ResultLayout.LISTING);
+        contentView = getWebFragment(By.id("cv_document_content_0_panel"), ContentViewElement.class);
         List<String> resultColumns = getContentViewColumns(contentView);
 
         SpreadsheetPage spreadsheet = openSpreadsheet(contentView);
