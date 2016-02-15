@@ -44,42 +44,32 @@ public class ITSpreadsheetTest extends AbstractTest {
 
     private final static String SPREADSHEET_ACTION_TITLE = "Spreadsheet";
 
-    private final static String[] STANDALONE_COLUMNS = new String[] {
-       "Title", "Author", "Description", "Modified", "Nature", "Subjects"
-    };
+    private final static String[] STANDALONE_COLUMNS = new String[] { "Title", "Author", "Description", "Modified",
+            "Nature", "Subjects" };
 
     private static final String IFRAME_XPATH = "//iframe[starts-with(@src, '/nuxeo/spreadsheet')]";
 
-    private final static String WORKSPACE_TITLE = "WorkspaceSpreadsheet_"
-        + new Date().getTime();
+    private final static String WORKSPACE_TITLE = "WorkspaceSpreadsheet_" + new Date().getTime();
 
     @Before
-    public void setUp()
-        throws DocumentBasePage.UserNotConnectedException, IOException {
+    public void setUp() throws DocumentBasePage.UserNotConnectedException, IOException {
         DocumentBasePage documentBasePage = login();
 
         // Create test File
-        DocumentBasePage workspacePage = createWorkspace(documentBasePage,
-            WORKSPACE_TITLE, null);
+        DocumentBasePage workspacePage = createWorkspace(documentBasePage, WORKSPACE_TITLE, null);
 
-        createFile(workspacePage,
-            "Test file", "Test File description", false, null, null,
-            null);
+        createFile(workspacePage, "Test file", "Test File description", false, null, null, null);
 
         logout();
     }
 
     @Test
-    public void itShouldBeAvailableInWorkspace() throws DocumentBasePage.UserNotConnectedException,
-        IOException {
+    public void itShouldBeAvailableInWorkspace() throws DocumentBasePage.UserNotConnectedException, IOException {
         DocumentBasePage documentBasePage = login();
-        DocumentBasePage workspacesPage = documentBasePage.getNavigationSubPage()
-            .goToDocument("Workspaces");
+        DocumentBasePage workspacesPage = documentBasePage.getNavigationSubPage().goToDocument("Workspaces");
         workspacesPage.getNavigationSubPage().goToDocument(WORKSPACE_TITLE);
 
-        ContentViewElement contentView = getWebFragment(
-            By.id("cv_document_content_0_panel"),
-            ContentViewElement.class);
+        ContentViewElement contentView = getWebFragment(By.id("cv_document_content_0_panel"), ContentViewElement.class);
 
         contentView.switchToResultLayout(ResultLayout.LISTING);
         assertNotNull(contentView.getActionByTitle(SPREADSHEET_ACTION_TITLE));
@@ -88,14 +78,11 @@ public class ITSpreadsheetTest extends AbstractTest {
     }
 
     @Test
-    public void itShouldBeAvailableInSearch() throws DocumentBasePage.UserNotConnectedException,
-        IOException {
+    public void itShouldBeAvailableInSearch() throws DocumentBasePage.UserNotConnectedException, IOException {
         DocumentBasePage documentBasePage = login();
         documentBasePage.goToSearchPage();
 
-        ContentViewElement contentView = getWebFragment(
-            By.id("nxw_searchContentView"),
-            ContentViewElement.class);
+        ContentViewElement contentView = getWebFragment(By.id("nxw_searchContentView"), ContentViewElement.class);
 
         contentView.switchToResultLayout(ResultLayout.LISTING);
         assertNotNull(contentView.getActionByTitle(SPREADSHEET_ACTION_TITLE));
@@ -104,8 +91,7 @@ public class ITSpreadsheetTest extends AbstractTest {
     }
 
     @Test
-    public void itShouldBeAvailableStandalone() throws DocumentBasePage.UserNotConnectedException,
-        IOException {
+    public void itShouldBeAvailableStandalone() throws DocumentBasePage.UserNotConnectedException, IOException {
         login();
 
         navToUrl(NUXEO_URL + "/spreadsheet");
@@ -127,17 +113,13 @@ public class ITSpreadsheetTest extends AbstractTest {
     }
 
     @Test
-    public void itShouldDisplayTheSameData() throws DocumentBasePage.UserNotConnectedException,
-        IOException {
+    public void itShouldDisplayTheSameData() throws DocumentBasePage.UserNotConnectedException, IOException {
         DocumentBasePage documentBasePage = login();
 
-        DocumentBasePage workspacesPage = documentBasePage.getNavigationSubPage()
-            .goToDocument("Workspaces");
+        DocumentBasePage workspacesPage = documentBasePage.getNavigationSubPage().goToDocument("Workspaces");
         workspacesPage.getNavigationSubPage().goToDocument(WORKSPACE_TITLE);
 
-        ContentViewElement contentView = getWebFragment(
-            By.id("cv_document_content_0_panel"),
-            ContentViewElement.class);
+        ContentViewElement contentView = getWebFragment(By.id("cv_document_content_0_panel"), ContentViewElement.class);
 
         contentView.switchToResultLayout(ResultLayout.LISTING);
         List<String> resultColumns = getContentViewColumns(contentView);
@@ -158,17 +140,13 @@ public class ITSpreadsheetTest extends AbstractTest {
     }
 
     @Test
-    public void itShouldAllowUpdatingData() throws DocumentBasePage.UserNotConnectedException,
-        IOException {
+    public void itShouldAllowUpdatingData() throws DocumentBasePage.UserNotConnectedException, IOException {
         DocumentBasePage documentBasePage = login();
 
-        DocumentBasePage workspacesPage = documentBasePage.getNavigationSubPage()
-            .goToDocument("Workspaces");
+        DocumentBasePage workspacesPage = documentBasePage.getNavigationSubPage().goToDocument("Workspaces");
         workspacesPage.getNavigationSubPage().goToDocument(WORKSPACE_TITLE);
 
-        ContentViewElement contentView = getWebFragment(
-            By.id("cv_document_content_0_panel"),
-            ContentViewElement.class);
+        ContentViewElement contentView = getWebFragment(By.id("cv_document_content_0_panel"), ContentViewElement.class);
 
         SpreadsheetPage spreadsheet = openSpreadsheet(contentView);
 
@@ -187,9 +165,7 @@ public class ITSpreadsheetTest extends AbstractTest {
         closeSpreadsheet(spreadsheet);
 
         // Check that the title was updated
-        contentView = getWebFragment(
-            By.id("cv_document_content_0_panel"),
-            ContentViewElement.class);
+        contentView = getWebFragment(By.id("cv_document_content_0_panel"), ContentViewElement.class);
 
         WebElement row = getContentViewRows(contentView).get(0);
         String title = row.findElement(By.className("documentTitle")).getText();
@@ -244,8 +220,7 @@ public class ITSpreadsheetTest extends AbstractTest {
     private List<String> getContentViewColumns(ContentViewElement cv) {
         List<String> headers = new ArrayList<>();
         WebElement dataOutput = cv.findElement(By.className("dataOutput"));
-        List<WebElement> cvHeaders = dataOutput.findElements(
-            By.className("colHeader"));
+        List<WebElement> cvHeaders = dataOutput.findElements(By.className("colHeader"));
         for (WebElement e : cvHeaders) {
             headers.add(e.getText());
         }
