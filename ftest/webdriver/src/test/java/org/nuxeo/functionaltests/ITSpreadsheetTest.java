@@ -161,7 +161,7 @@ public class ITSpreadsheetTest extends AbstractTest {
 
         spreadsheet.save();
 
-        assertEquals("Saved 1 rows.", spreadsheet.getMessages());
+        assertEquals("1 rows saved", spreadsheet.getMessages());
 
         closeSpreadsheet(spreadsheet);
 
