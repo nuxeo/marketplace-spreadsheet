@@ -71,7 +71,7 @@ public class ITSpreadsheetTest extends AbstractTest {
 
         ContentViewElement contentView = getWebFragment(By.id("cv_document_content_0_panel"), ContentViewElement.class);
 
-        contentView.switchToResultLayout(ResultLayout.LISTING);
+        contentView = contentView.switchToResultLayout(ResultLayout.LISTING);
         assertNotNull(contentView.getActionByTitle(SPREADSHEET_ACTION_TITLE));
 
         logout();
@@ -187,9 +187,8 @@ public class ITSpreadsheetTest extends AbstractTest {
      * opens the spreadsheet popup
      */
     private SpreadsheetPage openSpreadsheet(ContentViewElement cv) {
-        cv.switchToResultLayout(ResultLayout.LISTING);
-
-        WebElement spreadsheetAction = cv.getActionByTitle(SPREADSHEET_ACTION_TITLE);
+        WebElement spreadsheetAction = cv.switchToResultLayout(ResultLayout.LISTING).getActionByTitle(
+                SPREADSHEET_ACTION_TITLE);
         assertNotNull(spreadsheetAction);
 
         spreadsheetAction.click();
