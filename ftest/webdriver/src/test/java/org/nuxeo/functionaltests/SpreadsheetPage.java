@@ -22,9 +22,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Spreadsheet page object
@@ -135,5 +138,15 @@ public class SpreadsheetPage {
     protected Object callHandsontable(String method, Object... params) {
         return ((JavascriptExecutor) driver).executeScript(
             "return $('#grid').handsontable('" + method + "', " + StringUtils.join(params, ",") + ");");
+    }
+
+    /**
+     * @since 8.4
+     */
+    public void waitReady() {
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(AbstractTest.driver).withTimeout(
+                AbstractTest.LOAD_TIMEOUT_SECONDS, TimeUnit.SECONDS).pollingEvery(
+                AbstractTest.POLLING_FREQUENCY_MILLISECONDS, TimeUnit.MILLISECONDS);
+        wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return window.nuxeoSpreadsheetReady;"));
     }
 }

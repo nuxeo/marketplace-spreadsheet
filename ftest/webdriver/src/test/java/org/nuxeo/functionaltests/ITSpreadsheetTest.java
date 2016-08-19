@@ -28,6 +28,8 @@ import org.nuxeo.functionaltests.contentView.ContentViewElement;
 import org.nuxeo.functionaltests.pages.DocumentBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,9 +58,9 @@ public class ITSpreadsheetTest extends AbstractTest {
         DocumentBasePage documentBasePage = login();
 
         // Create test File
-        DocumentBasePage workspacePage = createWorkspace(documentBasePage, WORKSPACE_TITLE, null);
+        DocumentBasePage workspacePage = documentBasePage.createWorkspace(WORKSPACE_TITLE, null);
 
-        createFile(workspacePage, "Test file", "Test File description", false, null, null, null);
+        workspacePage.createFile("Test file", "Test File description", false, null, null, null);
 
         logout();
     }
@@ -178,7 +180,7 @@ public class ITSpreadsheetTest extends AbstractTest {
     public void tearDown() throws DocumentBasePage.UserNotConnectedException {
         DocumentBasePage documentBasePage = login();
 
-        deleteWorkspace(documentBasePage, WORKSPACE_TITLE);
+        documentBasePage.deleteWorkspace(WORKSPACE_TITLE);
 
         logout();
     }
@@ -198,8 +200,10 @@ public class ITSpreadsheetTest extends AbstractTest {
         driver.switchTo().frame(iFrame);
 
         SpreadsheetPage spreadsheet = new SpreadsheetPage(driver);
-        // wait for ajax requests to complete
-        new AjaxRequestManager(driver).waitForJQueryRequests();
+
+        // wait for ajax requests and render to complete
+        spreadsheet.waitReady();
+
         // fill the page object
         fillElement(SpreadsheetPage.class, spreadsheet);
 
