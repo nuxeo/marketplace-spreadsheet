@@ -4,7 +4,7 @@
     <p>This addon allows bulk editing documents starting from a content view result set,
       providing a spreadsheet-like user experience.</p>
   </description>
-  <home-page>http://doc.nuxeo.com/x/lQ45AQ</home-page>
+  <home-page>https://doc.nuxeo.com/nxdoc/nuxeo-spreadsheet/</home-page>
   <vendor>Nuxeo</vendor>
   <installer restart="true" />
   <uninstaller restart="true" />
