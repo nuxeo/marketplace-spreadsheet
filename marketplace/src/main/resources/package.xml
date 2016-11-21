@@ -1,8 +1,7 @@
 <package type="addon" name="nuxeo-spreadsheet" version="@VERSION@">
   <title>Nuxeo Spreadsheet</title>
   <description>
-    <p>This addon allows bulk editing documents starting from a content view result set,
-      providing a spreadsheet-like user experience.</p>
+    <p>TThe Nuxeo Spreadsheet addon allows bulk editing documents metadata starting from a content view result set, providing a spreadsheet-like user experience.</p>
   </description>
   <home-page>https://doc.nuxeo.com/nxdoc/nuxeo-spreadsheet/</home-page>
   <vendor>Nuxeo</vendor>
