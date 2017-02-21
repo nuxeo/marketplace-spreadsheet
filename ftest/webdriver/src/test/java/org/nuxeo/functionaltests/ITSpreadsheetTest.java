@@ -46,8 +46,7 @@ public class ITSpreadsheetTest extends AbstractTest {
 
     private final static String SPREADSHEET_ACTION_TITLE = "Spreadsheet";
 
-    private final static String[] STANDALONE_COLUMNS = new String[] { "Title", "Author", "Description", "Modified",
-            "Nature", "Subjects" };
+    private final static String[] STANDALONE_COLUMNS = new String[] { "Title", "Modified", "Last Contributor", "State" };
 
     private static final String IFRAME_XPATH = "//iframe[starts-with(@src, '/nuxeo/spreadsheet')]";
 
