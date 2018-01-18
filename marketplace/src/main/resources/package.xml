@@ -14,8 +14,8 @@
   <!-- <nuxeo-validation>primary_validation</nuxeo-validation> -->
   <nuxeo-validation>nuxeo_certified</nuxeo-validation>
   <!-- <production-state>proto</production-state> -->
-  <production-state>testing</production-state>
-  <!-- <production-state>production_ready</production-state> -->
+  <!-- <production-state>testing</production-state> -->
+  <production-state>production_ready</production-state>
   <supported>true</supported>
   <platforms>
     <platform>server-@DISTRIB_VERSION@</platform>
